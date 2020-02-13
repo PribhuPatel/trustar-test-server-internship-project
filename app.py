@@ -96,6 +96,15 @@ def reports():
     return "Mere pass nahi hai"
 
 
+@app.route('/enclaves', methods=["GET"])
+@token_auth.login_required
+def enclaves():
+    with open("enclaves.json","r") as f:
+        response = Response(f.read())
+        response.headers["Content-Type"] = "application/json"
+        return response
+
+
 @app.route('/indicators', methods=["GET"])
 @token_auth.login_required
 def indicators():

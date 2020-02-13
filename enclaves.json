@@ -1,0 +1,282 @@
+[
+    {
+        "name": "JRoosen",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "645717ce-6c43-49b4-aaaa-b1cc642f764b",
+        "type": "RESEARCH"
+    },
+    {
+        "name": "Hail A TAXII",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "7819c8d1-2b7b-48ac-b127-c71d8e7de612",
+        "type": "OPEN"
+    },
+    {
+        "name": "Bambenek",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "ed9d7459-dd90-414f-96ee-5e37f232cd18",
+        "type": "OPEN"
+    },
+    {
+        "name": "Abuse SSL IP Blacklist",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "00cbe17f-8d3c-4dd8-84ac-3c0c4e6a7c02",
+        "type": "OPEN"
+    },
+    {
+        "name": "James_inthe_box",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "5fefc6f4-57f4-47a6-8f23-b97ce83d2c32",
+        "type": "RESEARCH"
+    },
+    {
+        "name": "Unit 42",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "11125bbd-ca70-4f16-bce2-7e361693ceb2",
+        "type": "OPEN"
+    },
+    {
+        "name": "Techhelplist",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "42eed79a-5a4e-48da-a412-190bf4a3acbc",
+        "type": "RESEARCH"
+    },
+    {
+        "name": "Malwarebytes",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "5d5d1eee-f65f-4fd9-a14b-43c597d9af9e",
+        "type": "OPEN"
+    },
+    {
+        "name": "TruSTAR Financial",
+        "read": true,
+        "create": true,
+        "update": false,
+        "id": "de85818c-0107-48c1-ba8c-2e42b91f7736",
+        "type": "INTERNAL"
+    },
+    {
+        "name": "ps66uk",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "f6205545-3c00-490e-bf77-cbae6afc997c",
+        "type": "RESEARCH"
+    },
+    {
+        "name": "Abuse Ransomware",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "170c3077-f502-4b1a-b8f7-7538f83a66c1",
+        "type": "OPEN"
+    },
+    {
+        "name": "Hybrid Analysis Public Feed",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "2eeccced-c740-4ad9-aa5c-82744cd1f6aa",
+        "type": "OPEN"
+    },
+    {
+        "name": "Zerophage",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "e83a4fa6-af05-417d-b13a-b18a5fc9b426",
+        "type": "RESEARCH"
+    },
+    {
+        "name": "Mak Wana",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "c10226c8-21dd-463c-b4cd-b8e14983d248",
+        "type": "RESEARCH"
+    },
+    {
+        "name": "Infosecisland",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "eec779f5-7abc-48ea-ad19-4c5a5f8f5822",
+        "type": "OPEN"
+    },
+    {
+        "name": "EU-CERT",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "e7f4907a-2909-48e8-9c2d-74ffc4b22e8c",
+        "type": "OPEN"
+    },
+    {
+        "name": "Malware Traffic Analysis",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "e13e0b52-0977-4cf6-be37-3445865c9e8a",
+        "type": "RESEARCH"
+    },
+    {
+        "name": "Avman1995",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "0199dd32-575d-4361-8c14-d1c468816381",
+        "type": "RESEARCH"
+    },
+    {
+        "name": "NeonPrimetime",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "3a8c95e0-6689-4142-b3ab-2900e59429d7",
+        "type": "RESEARCH"
+    },
+    {
+        "name": "DHS-AIS",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "cabbfa67-afd7-4a0c-a20f-e51e25923629",
+        "type": "OPEN"
+    },
+    {
+        "name": "Packetstorm",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "d2cf82f0-5aba-4cf4-ba3b-fc990829b663",
+        "type": "OPEN"
+    },
+    {
+        "name": "Community",
+        "read": true,
+        "create": true,
+        "update": false,
+        "id": "28177710-9cb8-aa2f-29e8-135c14365e80",
+        "type": "COMMUNITY"
+    },
+    {
+        "name": "Ring0x0",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "1474353b-cbf8-450c-8c6b-e5973e073ab2",
+        "type": "RESEARCH"
+    },
+    {
+        "name": "Internet Storm Center",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "eecdff2d-22ae-4e4a-b924-42da4e7ccd4b",
+        "type": "OPEN"
+    },
+    {
+        "name": "Jan0fficial",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "4355d90d-bd77-4612-9073-012b11a56e98",
+        "type": "RESEARCH"
+    },
+    {
+        "name": "Broadanalysis",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "0e4443fc-2b50-4756-b5e0-4ea30030bcb3",
+        "type": "OPEN"
+    },
+    {
+        "name": "pollo290987 \\_(ʘ_ʘ)_/",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "74f32d63-33c6-4edb-8cb9-c3c2a86b80d1",
+        "type": "RESEARCH"
+    },
+    {
+        "name": "TruStarResearch",
+        "read": true,
+        "create": true,
+        "update": true,
+        "id": "00f90e3a-a782-4095-86ed-9885744b5eb7",
+        "type": "INTERNAL"
+    },
+    {
+        "name": "Bauldini",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "9bfa800b-4a74-4be7-a09b-5724fb71ec5f",
+        "type": "RESEARCH"
+    },
+    {
+        "name": "TruSTARS",
+        "read": true,
+        "create": true,
+        "update": true,
+        "id": "c5a742cd-b7cc-4eb7-b8f1-1cd7ddcf69c5",
+        "type": "INTERNAL"
+    },
+    {
+        "name": "HazMalware",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "e6e48dcb-51cb-4911-9343-11f02ffe2bad",
+        "type": "RESEARCH"
+    },
+    {
+        "name": "NIST NVD",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "d2eec321-34bc-4db6-aa20-2ad0a52135fc",
+        "type": "OPEN"
+    },
+    {
+        "name": "DecayPotato",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "f83278e1-4f41-4602-8d3b-1e35d18f07b6",
+        "type": "RESEARCH"
+    },
+    {
+        "name": "My Online Security",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "752d5f90-3281-455d-8162-d629db21f37e",
+        "type": "RESEARCH"
+    },
+    {
+        "name": "US-CERT",
+        "read": true,
+        "create": false,
+        "update": false,
+        "id": "919879d7-88b3-4605-9464-b2a8fca5473a",
+        "type": "OPEN"
+    }
+]
