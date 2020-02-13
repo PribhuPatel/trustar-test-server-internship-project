@@ -2,10 +2,11 @@ import datetime
 import hashlib
 import json
 import time
-
+import random
 import mysql.connector as mysql
 from flask import Flask, Response,request
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
+import threading
 
 app = Flask(__name__)
 basic_auth = HTTPBasicAuth()
@@ -23,6 +24,37 @@ try:
 except mysql.Error as e:
     print(e)
     exit(1)
+
+
+nums = [0,1,2]
+def database_insert():
+    print(nums)
+    if len(nums):
+        num  = random.randint(0,len(nums)-1)
+        if num==0:
+            type="URL"
+        elif num==1:
+            type="IP"
+        elif num==2:
+            type="Mobile"
+        with open("data"+str(num)+".json","r") as f:
+            data=json.load(f)
+        if len(data):
+            indi_value= data.pop()
+            print(type,len(data))
+            with open("data"+str(num)+".json","w") as f:
+                json.dump(data,f)
+            cursor = connector.cursor(buffered=True)
+            print(indi_value)
+            cursor.execute("INSERT INTO indicators(type,value) VALUES(%s,%s)",(type,indi_value))
+            connector.commit()
+            cursor.close()
+        else:
+            nums.remove(num)
+        threading.Timer(3600, database_insert).start() # called every minute
+
+database_insert()
+
 
 
 @app.route('/', methods=["GET"])
@@ -127,7 +159,6 @@ def indicators():
     response = Response(json.dumps(response).replace("type","indicatorType"))
     response.headers["Content-Type"]="application/json"
     return response
-
 
 if __name__ == '__main__':
     app.run()
