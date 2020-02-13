@@ -26,7 +26,6 @@ except mysql.Error as e:
 
 
 @app.route('/', methods=["GET"])
-@token_auth.login_required
 def home():
     return "Its our app"
 
