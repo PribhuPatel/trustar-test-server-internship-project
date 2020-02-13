@@ -1,5 +1,5 @@
 /venv/
 /.idea/
-data0.json
-data1.json
-data2.json
+/data2.json
+/data1.json
+/data0.json

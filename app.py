@@ -91,9 +91,46 @@ def verify_token(token):
 
 
 @app.route('/reports', methods=["GET"])
-@token_auth.login_required
+# @token_auth.login_required
 def reports():
-    return "Mere pass nahi hai"
+    from_time = int(request.args.get('from') or 0)
+    to_time = int(request.args.get('to') or 0)
+    limit=int(request.args.get('pageSize') or 100)
+    page_num=int(request.args.get('pageNumber') or 0)
+    from_time = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(int(from_time)))
+    if to_time:
+        to_time = "\""+time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(int(to_time)))+"\""
+    else:
+        to_time = "NOW()"
+    print(from_time)
+    cursor = connector.cursor(buffered=True,dictionary=True)
+    cursor.execute(f"SELECT id,UNIX_TIMESTAMP(created) as created,UNIX_TIMESTAMP(updated) as updated,title,sector,distributionType,UNIX_TIMESTAMP(timeBegan) as timeBegan,reportBody,externalTrackingId,enclaveIds FROM reports WHERE created BETWEEN \"{from_time}\" AND {to_time} ORDER BY created DESC LIMIT {limit*page_num},{limit*page_num+limit+1}")
+    fetch_data=cursor.fetchall()
+    cursor.close()
+
+    hasNext=False
+    if len(fetch_data)>limit:
+        hasNext=True
+        fetch_data.pop()
+
+    for i in range(0,len(fetch_data)):
+        fetch_data[i]["sector"] = json.loads(fetch_data[i]["sector"])
+        fetch_data[i]["enclaveIds"] = json.loads(fetch_data[i]["enclaveIds"])
+
+    response = {
+        "hasNext": hasNext,
+        "page":page_num,
+        "items": fetch_data
+    }
+    # asd=json.dumps(response)
+    # asd = json.loads(asd)
+    # asd=json.dumps(asd)
+    # print(asd)
+    # asd=json.JSONEncoder(fetch_data)
+    # print(asd)
+    response = Response(json.dumps(response))
+    response.headers["Content-Type"]="application/json"
+    return response
 
 
 @app.route('/enclaves', methods=["GET"])
@@ -108,17 +145,17 @@ def enclaves():
 @app.route('/indicators', methods=["GET"])
 @token_auth.login_required
 def indicators():
-    from_time = int(request.args.get('from'))
-    to_time = int(request.args.get('to'))
-    # from_time = 1581516057
-    # to_time = 1581536057
-    limit=int(request.args.get('pageSize'))
-    page_num=int(request.args.get('pageNumber'))
+    from_time = int(request.args.get('from') or 0)
+    to_time = int(request.args.get('to') or 0)
+    limit=int(request.args.get('pageSize') or 100)
+    page_num=int(request.args.get('pageNumber') or 0)
     from_time = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(int(from_time)))
-    to_time = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(int(to_time)))
-
+    if to_time:
+        to_time = "\""+time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(int(to_time)))+"\""
+    else:
+        to_time = "NOW()"
     cursor = connector.cursor(buffered=True,dictionary=True)
-    cursor.execute(f"SELECT type,value FROM indicators WHERE time_stamp BETWEEN \"{from_time}\" AND \"{to_time}\" ORDER BY id DESC LIMIT {limit*page_num},{limit*page_num+limit+1}")
+    cursor.execute(f"SELECT type,value FROM indicators WHERE time_stamp BETWEEN \"{from_time}\" AND {to_time} ORDER BY id DESC LIMIT {limit*page_num},{limit*page_num+limit+1}")
     fetch_data=cursor.fetchall()
     cursor.close()
 
