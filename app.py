@@ -25,7 +25,11 @@ except mysql.Error as e:
     exit(1)
 
 
-# connector.close()
+@app.route('/', methods=["GET"])
+@token_auth.login_required
+def home():
+    return "Its our app"
+
 
 @basic_auth.verify_password
 def verify_password(username, password):

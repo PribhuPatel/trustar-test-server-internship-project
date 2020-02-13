@@ -1,0 +1,4 @@
+Flask
+Flask-HTTPAuth
+Jinja2
+mysql-connector-python
