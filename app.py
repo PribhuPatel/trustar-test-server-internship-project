@@ -43,7 +43,7 @@ def verify_password(username, password):
         return False
 
 
-@app.route('/oauth/token', methods=["GET"])
+@app.route('/oauth/token', methods=["POST"])
 @basic_auth.login_required
 def token_provider():
     ts = time.time()
