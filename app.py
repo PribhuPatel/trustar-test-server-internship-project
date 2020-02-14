@@ -91,20 +91,28 @@ def verify_token(token):
 
 
 @app.route('/reports', methods=["GET"])
-# @token_auth.login_required
+@token_auth.login_required
 def reports():
     from_time = int(request.args.get('from') or 0)
     to_time = int(request.args.get('to') or 0)
-    limit=int(request.args.get('pageSize') or 100)
+    limit=int(request.args.get('pageSize') or 99)
     page_num=int(request.args.get('pageNumber') or 0)
     from_time = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(int(from_time)))
+    enclaves = request.args.get('enclaveIds') or "[]"
+    mysql_json_search="JSON_CONTAINS(enclaveIds,\"[]\")"
+    if enclaves!="[]":
+        enclaves=enclaves.strip("[]").split(",")
+        mysql_json_search = ""
+        for i in enclaves:
+            mysql_json_search+=f"JSON_CONTAINS(enclaveIds,\"[\"\"{i}\"\"]\") OR "
+        mysql_json_search=mysql_json_search[:-4]
     if to_time:
         to_time = "\""+time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(int(to_time)))+"\""
     else:
         to_time = "NOW()"
-    print(from_time)
+    query=f"SELECT id,UNIX_TIMESTAMP(created) as created,UNIX_TIMESTAMP(updated) as updated,title,sector,distributionType,UNIX_TIMESTAMP(timeBegan) as timeBegan,reportBody,externalTrackingId,enclaveIds FROM reports WHERE (created BETWEEN \"{from_time}\" AND {to_time}) AND ({mysql_json_search}) ORDER BY created DESC LIMIT {limit * page_num},{limit * page_num + limit + 1}"
     cursor = connector.cursor(buffered=True,dictionary=True)
-    cursor.execute(f"SELECT id,UNIX_TIMESTAMP(created) as created,UNIX_TIMESTAMP(updated) as updated,title,sector,distributionType,UNIX_TIMESTAMP(timeBegan) as timeBegan,reportBody,externalTrackingId,enclaveIds FROM reports WHERE created BETWEEN \"{from_time}\" AND {to_time} ORDER BY created DESC LIMIT {limit*page_num},{limit*page_num+limit+1}")
+    cursor.execute(query)
     fetch_data=cursor.fetchall()
     cursor.close()
 
@@ -122,12 +130,6 @@ def reports():
         "page":page_num,
         "items": fetch_data
     }
-    # asd=json.dumps(response)
-    # asd = json.loads(asd)
-    # asd=json.dumps(asd)
-    # print(asd)
-    # asd=json.JSONEncoder(fetch_data)
-    # print(asd)
     response = Response(json.dumps(response))
     response.headers["Content-Type"]="application/json"
     return response
@@ -147,7 +149,7 @@ def enclaves():
 def indicators():
     from_time = int(request.args.get('from') or 0)
     to_time = int(request.args.get('to') or 0)
-    limit=int(request.args.get('pageSize') or 100)
+    limit=int(request.args.get('pageSize') or 99)
     page_num=int(request.args.get('pageNumber') or 0)
     from_time = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(int(from_time)))
     if to_time:
