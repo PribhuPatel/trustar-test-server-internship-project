@@ -177,5 +177,11 @@ def indicators():
     response.headers["Content-Type"]="application/json"
     return response
 
+
+@app.route(api_global+'/indicators/search', methods=["GET","POST"])
+@token_auth.login_required
+def indicators_search():
+    indicators()
+
 if __name__ == '__main__':
     app.run()
