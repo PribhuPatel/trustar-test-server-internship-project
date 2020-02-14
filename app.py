@@ -10,6 +10,8 @@ app = Flask(__name__)
 basic_auth = HTTPBasicAuth()
 token_auth = HTTPTokenAuth()
 
+api_global='/api/1.3'
+
 config = {
     'user': 'trustar',
     'password': 'trustar',
@@ -41,7 +43,7 @@ def verify_password(username, password):
         return False
 
 
-@app.route('/auth', methods=["GET"])
+@app.route('/oauth/token', methods=["GET"])
 @basic_auth.login_required
 def token_provider():
     ts = time.time()
@@ -90,7 +92,7 @@ def verify_token(token):
         return False
 
 
-@app.route('/reports', methods=["GET"])
+@app.route(api_global+'/reports', methods=["GET"])
 @token_auth.login_required
 def reports():
     from_time = int(request.args.get('from') or 0)
@@ -135,7 +137,7 @@ def reports():
     return response
 
 
-@app.route('/enclaves', methods=["GET"])
+@app.route(api_global+'/enclaves', methods=["GET"])
 @token_auth.login_required
 def enclaves():
     with open("enclaves.json","r") as f:
@@ -144,7 +146,7 @@ def enclaves():
         return response
 
 
-@app.route('/indicators', methods=["GET"])
+@app.route(api_global+'/indicators', methods=["GET"])
 @token_auth.login_required
 def indicators():
     from_time = int(request.args.get('from') or 0)
