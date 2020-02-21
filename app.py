@@ -95,7 +95,7 @@ def verify_token(token):
 @app.route(api_global+'/reports', methods=["GET"])
 @token_auth.login_required
 def reports():
-    from_time = int(request.args.get('from') or 0)
+    from_time = int(request.args.get('from') or (time.time()-7776000))
     to_time = int(request.args.get('to') or 0)
     limit=int(request.args.get('pageSize') or 99)
     page_num=int(request.args.get('pageNumber') or 0)
@@ -112,7 +112,7 @@ def reports():
         to_time = "\""+time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(int(to_time)))+"\""
     else:
         to_time = "NOW()"
-    query=f"SELECT id,UNIX_TIMESTAMP(created) as created,UNIX_TIMESTAMP(updated) as updated,title,sector,distributionType,UNIX_TIMESTAMP(timeBegan) as timeBegan,reportBody,externalTrackingId,enclaveIds FROM reports WHERE (created BETWEEN \"{from_time}\" AND {to_time}) AND ({mysql_json_search}) ORDER BY created DESC LIMIT {limit * page_num},{limit * page_num + limit + 1}"
+    query=f"SELECT id,UNIX_TIMESTAMP(created) as created,UNIX_TIMESTAMP(updated) as updated,title,sector,distributionType,UNIX_TIMESTAMP(timeBegan) as timeBegan,reportBody,externalTrackingId,enclaveIds FROM reports WHERE (created BETWEEN \"{from_time}\" AND {to_time}) AND ({mysql_json_search}) ORDER BY created DESC LIMIT {limit * page_num},{limit + 1}"
     cursor = connector.cursor(buffered=True,dictionary=True)
     cursor.execute(query)
     fetch_data=cursor.fetchall()
@@ -149,7 +149,7 @@ def enclaves():
 @app.route(api_global+'/indicators', methods=["GET"])
 @token_auth.login_required
 def indicators():
-    from_time = int(request.args.get('from') or 0)
+    from_time = int(request.args.get('from') or (time.time()-7776000))
     to_time = int(request.args.get('to') or 0)
     limit=int(request.args.get('pageSize') or 99)
     page_num=int(request.args.get('pageNumber') or 0)
@@ -159,7 +159,7 @@ def indicators():
     else:
         to_time = "NOW()"
     cursor = connector.cursor(buffered=True,dictionary=True)
-    cursor.execute(f"SELECT type,value FROM indicators WHERE time_stamp BETWEEN \"{from_time}\" AND {to_time} ORDER BY id DESC LIMIT {limit*page_num},{limit*page_num+limit+1}")
+    cursor.execute(f"SELECT type,value FROM indicators WHERE time_stamp BETWEEN \"{from_time}\" AND {to_time} ORDER BY id DESC LIMIT {limit*page_num},{limit+1}")
     fetch_data=cursor.fetchall()
     cursor.close()
 
