@@ -15,7 +15,7 @@ api_global='/api/1.3'
 config = {
     'user': 'trustar',
     'password': 'trustar',
-    'host': '107.23.198.222',
+    'host': '54.234.24.134',
     'database': 'trustar'
 }
 
