@@ -141,7 +141,12 @@ def reports():
 @token_auth.login_required
 def enclaves():
     with open("enclaves.json", "r") as f:
-        response = Response(f.read())
+        data = {
+            "hasNext":False,
+            "page":0,
+            "items":json.load(f)
+        }
+        response = Response(json.dumps(data))
         response.headers["Content-Type"] = "application/json"
         return response
 
