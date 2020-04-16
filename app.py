@@ -112,7 +112,7 @@ def reports():
         to_time = "\"" + time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(int(to_time))) + "\""
     else:
         to_time = "NOW()"
-    query = f"SELECT id,UNIX_TIMESTAMP(created) as created,UNIX_TIMESTAMP(updated) as updated,title,sector,distributionType,UNIX_TIMESTAMP(timeBegan) as timeBegan,reportBody,externalTrackingId,enclaveIds FROM reports WHERE (created BETWEEN \"{from_time}\" AND {to_time}) AND ({mysql_json_search}) ORDER BY created DESC LIMIT {limit * page_num},{limit + 1}"
+    query = f"SELECT id,UNIX_TIMESTAMP(created) as created,UNIX_TIMESTAMP(updated) as updated,title,sector,distributionType,UNIX_TIMESTAMP(timeBegan) as timeBegan,reportBody,externalTrackingId,enclaveIds, indicators FROM reports WHERE (created BETWEEN \"{from_time}\" AND {to_time}) AND ({mysql_json_search}) ORDER BY created DESC LIMIT {limit * page_num},{limit + 1}"
     cursor = connector.cursor(buffered=True, dictionary=True)
     cursor.execute(query)
     fetch_data = cursor.fetchall()
@@ -126,6 +126,7 @@ def reports():
     for i in range(0, len(fetch_data)):
         fetch_data[i]["sector"] = json.loads(fetch_data[i]["sector"])
         fetch_data[i]["enclaveIds"] = json.loads(fetch_data[i]["enclaveIds"])
+        fetch_data[i]["indicators"] = json.loads(fetch_data[i]["indicators"])
 
     response = {
         "hasNext": hasNext,
