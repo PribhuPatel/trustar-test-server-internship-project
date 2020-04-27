@@ -6,7 +6,7 @@ import threading
 config = {
     'user': 'trustar',
     'password': 'trustar',
-    'host': '54.234.24.134',
+    'host': '34.200.254.120',
     'database': 'trustar'
 }
 
